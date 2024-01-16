@@ -3,6 +3,7 @@ package com.example.myweather
 import android.app.Activity
 import android.os.Bundle
 import android.os.Handler
+import android.os.Looper
 import android.widget.TextView
 import android.widget.Toast
 import androidx.annotation.MainThread
@@ -19,13 +20,13 @@ import okio.IOException
 import kotlin.concurrent.thread
 
 class MainActivity : AppCompatActivity() {
-    val textView = findViewById<TextView>(R.id.textWeatherId)
+    lateinit var textView : TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
-
+        Handler(Looper.getMainLooper()){}
+        textView = findViewById(R.id.textWeatherId)
 
 
         fetchWeatherData("Rostov-on-Don")
@@ -55,6 +56,7 @@ class MainActivity : AppCompatActivity() {
                     runOnUiThread {
                         Toast.makeText(this@MainActivity, "Success!", Toast.LENGTH_SHORT).show()
                     }
+                    textView.text = "crash"
 
 
 
