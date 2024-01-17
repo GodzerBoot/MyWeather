@@ -1,8 +1,12 @@
 package com.example.myweather
 
+import com.squareup.moshi.Json
+import com.squareup.moshi.JsonClass
+
+@JsonClass(generateAdapter = true)
 data class Weather (
-    val temperature: Double,
-    val humidity: Int,
-    val description: String,
-    val icon: String
+    @Json(name = "last_updated") val lastUpdated: String,
+    @Json(name = "temp_c") val tempC: Double,
+    @Json(name = "humidity") val humidity: Int,
+    @Json(name = "condition:text") val conditionText : String
 )

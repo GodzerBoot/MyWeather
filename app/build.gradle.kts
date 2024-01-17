@@ -37,10 +37,15 @@ android {
 
 dependencies {
 
+    implementation ("com.fasterxml.jackson.core:jackson-databind:2.15.3")
+
+
     implementation ("com.google.android.gms:play-services-location:21.0.1")
-    implementation ("com.squareup.okhttp3:okhttp:4.9.0")
-    implementation( "com.squareup.okhttp3:logging-interceptor:4.9.0")
-    implementation( "com.squareup.moshi:moshi:1.12.0")
+    implementation("com.squareup.retrofit2:retrofit:2.9.0")
+    implementation ("com.squareup.okhttp3:okhttp:4.11.0")
+    implementation( "com.squareup.okhttp3:logging-interceptor:4.9.3")
+    implementation( "com.squareup.moshi:moshi-kotlin:1.12.0")
+    implementation("com.squareup.retrofit:converter-gson:2.0.0-beta2")
 
     implementation("androidx.core:core-ktx:1.12.0")
     implementation("androidx.appcompat:appcompat:1.6.1")
