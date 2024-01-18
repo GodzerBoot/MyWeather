@@ -1,26 +1,28 @@
 package com.example.myweather
 
 import okhttp3.OkHttpClient
-import retrofit.GsonConverterFactory
-import retrofit.GsonConverterFactory.*
 import retrofit2.Callback
 import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 
 
 class   NetworkClient {
-    private val client = OkHttpClient()
+    private val client = OkHttpClient.Builder()
     val retrofit = Retrofit.Builder()
         .baseUrl("http://api.weatherapi.com/v1/")
         .addConverterFactory(GsonConverterFactory.create())
-        .client(client)
+        .client(client.build())
         .build()
-    fun fetchWeatherData(q: String, callback: Callback) {
+    fun fetchWeatherData(q: String, callback: Callback<Weather?>) {
         val key = "ac94d90b2d854a1eb4a160612241101"
-        val url = "http://api.weatherapi.com/v1/current.json?key=$key&q=Paris"
+
+
         val service = retrofit.create(WeatherService::class.java)
-        val callSync = service.getWeather()
+        val callAsync = service.getWeather(key, "Paris")
 
 
-        client.newCall().enqueue(callback)
+        callAsync?.enqueue(callback)
+
+
     }
 }
