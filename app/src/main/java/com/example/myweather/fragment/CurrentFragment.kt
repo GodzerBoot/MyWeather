@@ -2,6 +2,7 @@ package com.example.myweather.fragment
 
 import android.os.Bundle
 import android.view.View
+import android.widget.Button
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -17,6 +18,7 @@ class CurrentFragment : Fragment(R.layout.fragment_current) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
         val textView = getView()?.findViewById<TextView>(R.id.textView)
+
 
         if (textView != null) {
             textView.text = "textHere"
