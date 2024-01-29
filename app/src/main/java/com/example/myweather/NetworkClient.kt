@@ -1,5 +1,8 @@
 package com.example.myweather
 
+
+import com.example.myweather.model.WeatherResponse
+import com.example.myweather.service.WeatherService
 import okhttp3.OkHttpClient
 import retrofit2.Callback
 import retrofit2.Retrofit
@@ -13,7 +16,7 @@ class   NetworkClient {
         .addConverterFactory(GsonConverterFactory.create())
         .client(client.build())
         .build()
-    fun fetchWeatherData(q: String, callback: Callback<Weather?>) {
+    fun fetchWeatherData(q: String, callback: Callback<WeatherResponse>) {
         val key = "ac94d90b2d854a1eb4a160612241101"
 
 
@@ -21,7 +24,7 @@ class   NetworkClient {
         val callAsync = service.getWeather(key, "Paris")
 
 
-        callAsync?.enqueue(callback)
+        callAsync.enqueue(callback)
 
 
     }

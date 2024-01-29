@@ -7,10 +7,9 @@
     android:orientation="vertical"
     tools:context=".MainActivity">
 
-    <TextView
-        android:id="@+id/textWeatherId"
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/fragmentContainerView"
+        android:name="com.example.myweather.fragment.CurrentFragment"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:editable="false"
-        android:text="TextView" />
+        android:layout_height="wrap_content" />
 </LinearLayout>
