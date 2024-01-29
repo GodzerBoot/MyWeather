@@ -30,22 +30,24 @@ class ViewModelMain : ViewModel() {
     }
 
     private fun fetchWeatherData() {
+        //Network client does not operate
         NetworkClient().fetchWeatherData("Paris", object : Callback<WeatherResponse> {
             override fun onFailure(call: Call<WeatherResponse?>, t: Throwable) {
-                this@ViewModelMain.text = "trouble"
+                text = "trouble"
             }
 
             override fun onResponse(
                 call: Call<WeatherResponse>,
                 response: Response<WeatherResponse>
             ) {
+                text = "respone is here!"
                 val weather = response.body()
                 if (response.isSuccessful && weather != null) {
 
-                    this@ViewModelMain.text = updateWeatherUI(weather)
+                    text = updateWeatherUI(weather)
 
                 } else {
-                    this@ViewModelMain.text = "code is "+ response.code().toString()
+                    text = "code is "+ response.code().toString()
                 }
             }
         })

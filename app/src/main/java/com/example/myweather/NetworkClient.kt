@@ -21,7 +21,7 @@ class   NetworkClient {
 
 
         val service = retrofit.create(WeatherService::class.java)
-        val callAsync = service.getWeather(key, "Paris")
+        val callAsync = service.getWeather(key, q)
 
 
         callAsync.enqueue(callback)
