@@ -20,10 +20,6 @@ class CurrentFragment : Fragment(R.layout.fragment_current) {
         val textView = getView()?.findViewById<TextView>(R.id.textView)
 
 
-        if (textView != null) {
-            textView.text = "textHere"
-        }
-
         val observer = Observer<String> { freshWeatherData ->
             // Update the UI, in this case, a TextView.
             if (textView != null) {
