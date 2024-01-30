@@ -7,12 +7,16 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
+data class UiState(
+    val text : String,
+    val iconUrl : String
+)
 
 class ViewModelMain : ViewModel() {
 
 
 
-    val liveData = MutableLiveData("")
+    val liveData = MutableLiveData(UiState("Null", "Null"))
 
     init {
         fetchWeatherData()
@@ -23,7 +27,7 @@ class ViewModelMain : ViewModel() {
         //Network client does not operate
         NetworkClient().fetchWeatherData("Paris", object : Callback<WeatherResponse> {
             override fun onFailure(call: Call<WeatherResponse?>, t: Throwable) {
-                liveData.value = "$t"
+                liveData.value = UiState("Error: $t", "Null" )
             }
 
             override fun onResponse(
@@ -33,10 +37,11 @@ class ViewModelMain : ViewModel() {
                 val weather = response.body()
                 if (response.isSuccessful && weather != null) {
 
-                    liveData.value = updateWeatherUI(weather)
+                    liveData.value = UiState(updateWeatherUI(weather), weather.current.condition.icon)
+
 
                 } else {
-                    liveData.value = "Net code is "+ response.code().toString()
+                    liveData.value = UiState("Net code is  ${response.code().toString()}", "Null" )
                 }
             }
         })
@@ -48,7 +53,7 @@ class ViewModelMain : ViewModel() {
         val descriptionText = weather.current.condition.text
 
 
-        return "temperature: $temperatureText\nhumidity: $humidityText\ntext: $descriptionText"
+        return "Temperature, C: $temperatureText\nHumidity, %: $humidityText\n$descriptionText"
 
     }
 }
