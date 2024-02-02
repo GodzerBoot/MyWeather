@@ -2,7 +2,6 @@ package com.example.myweather.fragment
 
 import android.os.Bundle
 import android.view.View
-import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.fragment.app.Fragment
@@ -20,8 +19,8 @@ class CurrentFragment : Fragment(R.layout.fragment_current) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
-        val textView = getView()?.findViewById<TextView>(R.id.textView)
-        val imageView = getView()?.findViewById<ImageView>(R.id.imageView)
+        val textView = getView()?.findViewById<TextView>(R.id.text_current_temp)
+        val imageView = getView()?.findViewById<ImageView>(R.id.image_condition)
 
         val observer = Observer<UiState> { freshWeatherData ->
             // Update the UI, in this case, a TextView.
