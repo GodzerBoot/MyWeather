@@ -9,8 +9,8 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import com.bumptech.glide.Glide
 import com.example.myweather.R
-import com.example.myweather.UiState
-import com.example.myweather.ViewModelMain
+import com.example.myweather.viewModel.UiState
+import com.example.myweather.viewModel.ViewModelMain
 
 class CurrentFragment : Fragment(R.layout.fragment_current) {
 
@@ -19,22 +19,27 @@ class CurrentFragment : Fragment(R.layout.fragment_current) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
-        val textView = getView()?.findViewById<TextView>(R.id.text_current_temp)
-        val imageView = getView()?.findViewById<ImageView>(R.id.image_condition)
+        val tempText = getView()?.findViewById<TextView>(R.id.text_current_temp)
+        val iconView = getView()?.findViewById<ImageView>(R.id.image_condition)
+        val skyStateText = getView()?.findViewById<TextView>(R.id.text_condition)
 
         val observer = Observer<UiState> { freshWeatherData ->
             // Update the UI, in this case, a TextView.
-            if (textView != null) {
-                textView.text = freshWeatherData.text
+            if (tempText != null) {
+                "${freshWeatherData.currentTemp} C".also { tempText.text = it }
             }
 
-            if (imageView != null){
+            if (iconView != null){
                 Glide
                     .with(this)
                     .load("https:" + freshWeatherData.iconUrl)
                     .centerCrop()
                     .placeholder(R.drawable.ic_launcher_foreground)
-                    .into(imageView);
+                    .into(iconView);
+            }
+
+            if (skyStateText != null){
+                freshWeatherData.conditionText.also { skyStateText.text = it}
             }
         }
 

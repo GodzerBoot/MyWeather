@@ -1,22 +1,25 @@
-package com.example.myweather
+package com.example.myweather.viewModel
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.example.myweather.NetworkClient
 import com.example.myweather.model.WeatherResponse
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
 data class UiState(
-    val text : String,
-    val iconUrl : String
+    val currentTemp : String = "Null",
+    val conditionText : String = "Null",
+    val iconUrl : String = "Null",
+
 )
 
 class ViewModelMain : ViewModel() {
 
 
 
-    val liveData = MutableLiveData(UiState("Null", "Null"))
+    val liveData = MutableLiveData(UiState())
 
     init {
         fetchWeatherData()
@@ -37,7 +40,7 @@ class ViewModelMain : ViewModel() {
                 val weather = response.body()
                 if (response.isSuccessful && weather != null) {
 
-                    liveData.value = UiState(updateWeatherUI(weather), weather.current.condition.icon)
+                    liveData.value = updateWeatherUI(weather)
 
 
                 } else {
@@ -47,13 +50,12 @@ class ViewModelMain : ViewModel() {
         })
     }
 
-    fun updateWeatherUI(weather: WeatherResponse): String {
-        val temperatureText = weather.current.tempC
-        val humidityText = weather.current.humidity
-        val descriptionText = weather.current.condition.text
-
-
-        return "Temperature, C: $temperatureText\nHumidity, %: $humidityText\n$descriptionText"
+    fun updateWeatherUI(weather: WeatherResponse): UiState {
+        return UiState(
+            weather.current.tempC.toString(),
+            "Sky condition: " + weather.current.condition.text,
+            weather.current.condition.icon
+        )
 
     }
 }
