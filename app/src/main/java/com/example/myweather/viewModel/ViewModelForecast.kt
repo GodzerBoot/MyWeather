@@ -25,13 +25,13 @@ class ViewModelForecast : ViewModel() {
     val liveData = MutableLiveData(UiStateForecast())
 
     init{
-
+        fetchForecastData()
     }
 
     fun fetchForecastData(){
         NetworkClient().fetchForecastData("Paris", "1", object : Callback<ForecastResponse>{
             override fun onFailure(call: Call<ForecastResponse>, t: Throwable) {
-                liveData.value = UiStateForecast("Error: $t")
+                liveData.value = UiStateForecast(maxTemp = "Error: $t")
             }
 
             override fun onResponse(
@@ -53,6 +53,8 @@ class ViewModelForecast : ViewModel() {
                         forecast.day.condition.text,
                         forecast.day.condition.icon
                         )
+                } else{
+                    liveData.value = UiStateForecast(maxTemp = "${response.code()}")
                 }
             }
         })

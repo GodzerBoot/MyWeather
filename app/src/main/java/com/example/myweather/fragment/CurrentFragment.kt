@@ -14,7 +14,7 @@ import com.example.myweather.viewModel.ViewModelCurrent
 
 class CurrentFragment : Fragment(R.layout.fragment_current) {
 
-    val viewModel: ViewModelCurrent by viewModels()
+    private val viewModel: ViewModelCurrent by viewModels()
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
