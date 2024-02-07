@@ -9,12 +9,12 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import com.bumptech.glide.Glide
 import com.example.myweather.R
-import com.example.myweather.viewModel.UiState
-import com.example.myweather.viewModel.ViewModelMain
+import com.example.myweather.viewModel.UiStateCurrent
+import com.example.myweather.viewModel.ViewModelCurrent
 
 class CurrentFragment : Fragment(R.layout.fragment_current) {
 
-    val viewModel: ViewModelMain by viewModels()
+    val viewModel: ViewModelCurrent by viewModels()
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -23,7 +23,7 @@ class CurrentFragment : Fragment(R.layout.fragment_current) {
         val iconView = getView()?.findViewById<ImageView>(R.id.image_condition)
         val skyStateText = getView()?.findViewById<TextView>(R.id.text_condition)
 
-        val observer = Observer<UiState> { freshWeatherData ->
+        val observer = Observer<UiStateCurrent> { freshWeatherData ->
             // Update the UI, in this case, a TextView.
             if (tempText != null) {
                 "${freshWeatherData.currentTemp} C".also { tempText.text = it }

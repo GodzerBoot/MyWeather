@@ -2,24 +2,24 @@ package com.example.myweather.viewModel
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.myweather.NetworkClient
+import com.example.myweather.network.NetworkClient
 import com.example.myweather.model.WeatherResponse
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-data class UiState(
+data class UiStateCurrent(
     val currentTemp : String = "Null",
     val conditionText : String = "Null",
     val iconUrl : String = "Null",
 
 )
 
-class ViewModelMain : ViewModel() {
+class ViewModelCurrent : ViewModel() {
 
 
 
-    val liveData = MutableLiveData(UiState())
+    val liveData = MutableLiveData(UiStateCurrent())
 
     init {
         fetchWeatherData()
@@ -30,7 +30,7 @@ class ViewModelMain : ViewModel() {
         //Network client does not operate
         NetworkClient().fetchWeatherData("Paris", object : Callback<WeatherResponse> {
             override fun onFailure(call: Call<WeatherResponse?>, t: Throwable) {
-                liveData.value = UiState("Error: $t", "Null" )
+                liveData.value = UiStateCurrent("Error: $t", "Null" )
             }
 
             override fun onResponse(
@@ -44,14 +44,14 @@ class ViewModelMain : ViewModel() {
 
 
                 } else {
-                    liveData.value = UiState("Net code is  ${response.code().toString()}", "Null" )
+                    liveData.value = UiStateCurrent("Net code is  ${response.code().toString()}", "Null" )
                 }
             }
         })
     }
 
-    fun updateWeatherUI(weather: WeatherResponse): UiState {
-        return UiState(
+    fun updateWeatherUI(weather: WeatherResponse): UiStateCurrent {
+        return UiStateCurrent(
             weather.current.tempC.toString(),
             "Sky condition: " + weather.current.condition.text,
             weather.current.condition.icon

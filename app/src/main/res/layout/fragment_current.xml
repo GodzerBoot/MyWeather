@@ -59,7 +59,7 @@
         app:constraint_referenced_ids="text_current_temp, image_condition"
         app:layout_constraintBottom_toBottomOf="@+id/currentLayout"
         app:layout_constraintTop_toTopOf="@+id/currentLayout"
-        app:layout_constraintVertical_bias="0.5" />
+        app:layout_constraintVertical_bias="0.6" />
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/fragmentContainerView2"

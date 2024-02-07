@@ -108,4 +108,31 @@
         app:layout_constraintEnd_toEndOf="@+id/textView9"
         app:layout_constraintStart_toStartOf="@+id/textView9"
         app:layout_constraintTop_toBottomOf="@+id/textView9" />
+
+    <TextView
+        android:id="@+id/precipitation_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Prcp.mm: 11"
+        app:layout_constraintEnd_toEndOf="@+id/textView10"
+        app:layout_constraintStart_toStartOf="@+id/textView10"
+        app:layout_constraintTop_toBottomOf="@+id/textView10" />
+
+    <TextView
+        android:id="@+id/sunrise_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Sunrise: 6 AM"
+        app:layout_constraintEnd_toEndOf="@+id/precipitation_text"
+        app:layout_constraintStart_toStartOf="@+id/precipitation_text"
+        app:layout_constraintTop_toBottomOf="@+id/precipitation_text" />
+
+    <TextView
+        android:id="@+id/sunset_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Sunset: 6 PM"
+        app:layout_constraintEnd_toEndOf="@+id/sunrise_text"
+        app:layout_constraintStart_toStartOf="@+id/sunrise_text"
+        app:layout_constraintTop_toBottomOf="@+id/sunrise_text" />
 </androidx.constraintlayout.widget.ConstraintLayout>
